@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreshTemplateGenerator.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,11 +33,15 @@ namespace FreshTemplateGenerator
                     sum += Convert.ToInt32(rowSpan);
                     if (sum == max)
                     {
-                        txtHtmlOutput.Text += string.Format("<div class='span-{0} last'>\r\n</div>\r\n", rowSpan);
+                        var x = new Div().InjectClass(string.Format(" class='span-{0} last'", rowSpan));
+                        x.InjectValue("test");
+                        txtHtmlOutput.Text += x.htmlElement;
                     }
                     else
                     {
-                        txtHtmlOutput.Text += string.Format("<div class='span-{0}'>\r\n</div>\r\n", rowSpan);
+                        var x = new Div().InjectClass(string.Format(" class='span-{0}'", rowSpan));
+                        x.InjectValue("test");
+                        txtHtmlOutput.Text += x.htmlElement;
                     }
                 }
             }
@@ -82,7 +87,7 @@ namespace FreshTemplateGenerator
         {
             int max = 24;
 
-            if (IsValidRow(txtTest.Text.Trim().Split(' '), 24))
+            if (IsValidRow(txtTest.Text.Trim().Split(' '), max))
             {
                 lblError.Text = "Good";
             }
