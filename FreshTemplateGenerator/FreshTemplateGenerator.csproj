@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Classes\Div.cs" />
     <Compile Include="Classes\Element.cs" />
+    <Compile Include="Classes\GenerateHtml.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -31,9 +31,9 @@
             this.txtHtmlOutput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
-            this.txtTest = new System.Windows.Forms.TextBox();
+            this.txtRows = new System.Windows.Forms.TextBox();
             this.lblError = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtValues = new System.Windows.Forms.TextBox();
             this.lblValue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -65,13 +65,13 @@
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
-            // txtTest
+            // txtRows
             // 
-            this.txtTest.Location = new System.Drawing.Point(12, 12);
-            this.txtTest.Name = "txtTest";
-            this.txtTest.Size = new System.Drawing.Size(512, 20);
-            this.txtTest.TabIndex = 3;
-            this.txtTest.TextChanged += new System.EventHandler(this.txtTest_TextChanged);
+            this.txtRows.Location = new System.Drawing.Point(12, 12);
+            this.txtRows.Name = "txtRows";
+            this.txtRows.Size = new System.Drawing.Size(512, 20);
+            this.txtRows.TabIndex = 3;
+            this.txtRows.TextChanged += new System.EventHandler(this.txtTest_TextChanged);
             // 
             // lblError
             // 
@@ -81,14 +81,14 @@
             this.lblError.Size = new System.Drawing.Size(0, 13);
             this.lblError.TabIndex = 4;
             // 
-            // textBox1
+            // txtValues
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 67);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(875, 156);
-            this.textBox1.TabIndex = 5;
+            this.txtValues.Location = new System.Drawing.Point(12, 67);
+            this.txtValues.Multiline = true;
+            this.txtValues.Name = "txtValues";
+            this.txtValues.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtValues.Size = new System.Drawing.Size(875, 156);
+            this.txtValues.TabIndex = 5;
             // 
             // lblValue
             // 
@@ -105,9 +105,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 496);
             this.Controls.Add(this.lblValue);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtValues);
             this.Controls.Add(this.lblError);
-            this.Controls.Add(this.txtTest);
+            this.Controls.Add(this.txtRows);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtHtmlOutput);
@@ -123,9 +123,9 @@
         private System.Windows.Forms.TextBox txtHtmlOutput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnGenerate;
-        private System.Windows.Forms.TextBox txtTest;
+        private System.Windows.Forms.TextBox txtRows;
         private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtValues;
         private System.Windows.Forms.Label lblValue;
     }
 }

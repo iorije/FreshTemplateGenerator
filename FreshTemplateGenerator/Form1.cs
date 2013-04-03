@@ -21,35 +21,38 @@ namespace FreshTemplateGenerator
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             ClearScreen();
-            var rawData = txtTest.Text.Trim();
-            var rowSpans = rawData.Split(' ');
+
+            var atIndex = ' ';
+            var rowSpans = createArrayAtChar(txtRows.Text, atIndex);
+
+            atIndex = '\\';
+            var values = createArrayAtChar(txtValues.Text ,atIndex);
             int max = 24;
 
+            var divs = new Dictionary<int,string>();
+            int i = 0;
+            foreach (var rowSpan in rowSpans)
+            {
+                //change values and key's from position
+                divs.Add(Convert.ToInt32(rowSpan), values[i]);
+                i++;
+            }
+            
             if (IsValidRow(rowSpans, max))
             {
-                var sum = 0;
-                foreach (var rowSpan in rowSpans)
-                {
-                    sum += Convert.ToInt32(rowSpan);
-                    if (sum == max)
-                    {
-                        var x = new Div().InjectClass(string.Format(" class='span-{0} last'", rowSpan));
-                        x.InjectValue("test");
-                        txtHtmlOutput.Text += x.htmlElement;
-                    }
-                    else
-                    {
-                        var x = new Div().InjectClass(string.Format(" class='span-{0}'", rowSpan));
-                        x.InjectValue("test");
-                        txtHtmlOutput.Text += x.htmlElement;
-                    }
-                }
+                txtHtmlOutput.Text += GenerateHtml.GenerateDivs(max, divs, txtHtmlOutput.Text); 
             }
             else
             {
                 txtHtmlOutput.Text += "Do the math again.\r\n";
             }
             lblError.Text = string.Empty;
+            txtHtmlOutput.Focus();
+        }
+
+        private string[] createArrayAtChar(string array, char atIndex)
+        {
+            return array.Trim().Split(atIndex);
         }
 
         private void ClearScreen()
@@ -87,7 +90,7 @@ namespace FreshTemplateGenerator
         {
             int max = 24;
 
-            if (IsValidRow(txtTest.Text.Trim().Split(' '), max))
+            if (IsValidRow(createArrayAtChar(txtRows.Text, ' '), max))
             {
                 lblError.Text = "Good";
             }

@@ -21,7 +21,7 @@ namespace FreshTemplateGenerator.Classes
 
         public IElement InjectValue(string valueToInject)
         {
-            htmlElement = htmlElement.Insert(htmlElement.IndexOf(">") + 1, valueToInject);
+            htmlElement = htmlElement.Insert(htmlElement.IndexOf(">") + 1, "\r\n\t" + valueToInject);
             return this;
         }
     }
