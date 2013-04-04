@@ -31,15 +31,17 @@
             this.txtHtmlOutput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
-            this.txtRows = new System.Windows.Forms.TextBox();
-            this.lblError = new System.Windows.Forms.Label();
-            this.txtValues = new System.Windows.Forms.TextBox();
-            this.lblValue = new System.Windows.Forms.Label();
+            this.dgvInput = new System.Windows.Forms.DataGridView();
+            this.span = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblInput = new System.Windows.Forms.Label();
+            this.lblValidate = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInput)).BeginInit();
             this.SuspendLayout();
             // 
             // txtHtmlOutput
             // 
-            this.txtHtmlOutput.Location = new System.Drawing.Point(12, 258);
+            this.txtHtmlOutput.Location = new System.Drawing.Point(12, 235);
             this.txtHtmlOutput.Multiline = true;
             this.txtHtmlOutput.Name = "txtHtmlOutput";
             this.txtHtmlOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -49,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 242);
+            this.label1.Location = new System.Drawing.Point(12, 219);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
@@ -57,7 +59,7 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(812, 229);
+            this.btnGenerate.Location = new System.Drawing.Point(812, 206);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(75, 23);
             this.btnGenerate.TabIndex = 2;
@@ -65,54 +67,61 @@
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
-            // txtRows
+            // dgvInput
             // 
-            this.txtRows.Location = new System.Drawing.Point(12, 12);
-            this.txtRows.Name = "txtRows";
-            this.txtRows.Size = new System.Drawing.Size(512, 20);
-            this.txtRows.TabIndex = 3;
-            this.txtRows.TextChanged += new System.EventHandler(this.txtTest_TextChanged);
+            this.dgvInput.AllowUserToOrderColumns = true;
+            this.dgvInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInput.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.span,
+            this.value});
+            this.dgvInput.Location = new System.Drawing.Point(12, 50);
+            this.dgvInput.Name = "dgvInput";
+            this.dgvInput.Size = new System.Drawing.Size(875, 150);
+            this.dgvInput.TabIndex = 1;
+            this.dgvInput.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInput_CellEndEdit);
             // 
-            // lblError
+            // span
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(533, 15);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(0, 13);
-            this.lblError.TabIndex = 4;
+            this.span.HeaderText = "span";
+            this.span.Name = "span";
             // 
-            // txtValues
+            // value
             // 
-            this.txtValues.Location = new System.Drawing.Point(12, 67);
-            this.txtValues.Multiline = true;
-            this.txtValues.Name = "txtValues";
-            this.txtValues.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtValues.Size = new System.Drawing.Size(875, 156);
-            this.txtValues.TabIndex = 5;
+            this.value.HeaderText = "value";
+            this.value.Name = "value";
             // 
-            // lblValue
+            // lblInput
             // 
-            this.lblValue.AutoSize = true;
-            this.lblValue.Location = new System.Drawing.Point(12, 51);
-            this.lblValue.Name = "lblValue";
-            this.lblValue.Size = new System.Drawing.Size(34, 13);
-            this.lblValue.TabIndex = 6;
-            this.lblValue.Text = "Value";
+            this.lblInput.AutoSize = true;
+            this.lblInput.Location = new System.Drawing.Point(12, 34);
+            this.lblInput.Name = "lblInput";
+            this.lblInput.Size = new System.Drawing.Size(31, 13);
+            this.lblInput.TabIndex = 3;
+            this.lblInput.Text = "Input";
+            // 
+            // lblValidate
+            // 
+            this.lblValidate.AutoSize = true;
+            this.lblValidate.Location = new System.Drawing.Point(65, 34);
+            this.lblValidate.Name = "lblValidate";
+            this.lblValidate.Size = new System.Drawing.Size(55, 13);
+            this.lblValidate.TabIndex = 4;
+            this.lblValidate.Text = "lblValidate";
             // 
             // FreshTemplateGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(899, 496);
-            this.Controls.Add(this.lblValue);
-            this.Controls.Add(this.txtValues);
-            this.Controls.Add(this.lblError);
-            this.Controls.Add(this.txtRows);
+            this.ClientSize = new System.Drawing.Size(899, 513);
+            this.Controls.Add(this.lblValidate);
+            this.Controls.Add(this.lblInput);
+            this.Controls.Add(this.dgvInput);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtHtmlOutput);
             this.Name = "FreshTemplateGenerator";
             this.Text = "Fresh Template Generator";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,10 +132,11 @@
         private System.Windows.Forms.TextBox txtHtmlOutput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnGenerate;
-        private System.Windows.Forms.TextBox txtRows;
-        private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.TextBox txtValues;
-        private System.Windows.Forms.Label lblValue;
+        private System.Windows.Forms.DataGridView dgvInput;
+        private System.Windows.Forms.DataGridViewTextBoxColumn span;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.Label lblInput;
+        private System.Windows.Forms.Label lblValidate;
     }
 }
 

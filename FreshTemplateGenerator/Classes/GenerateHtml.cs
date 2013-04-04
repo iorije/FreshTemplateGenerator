@@ -8,21 +8,23 @@ namespace FreshTemplateGenerator.Classes
 {
     public class GenerateHtml
     {
-        public static string GenerateDivs(int max, Dictionary<int, string> divs, string returnValue)
+        public static string GenerateDivs(int max, List<FormContainer> formContainer, string returnValue)
         {
             var index = 0;
-            foreach (var div in divs)
+            foreach (var div in formContainer)
             {
-                if (div.Key == max)
+                if (div.rowSpan == max)
                 {
-                    var x = new Div().InjectClass(string.Format(" class='span-{0} last'", div.Key));
-                    x.InjectValue(div.Value);
+                    var x = new Div().InjectClass(string.Format(" class='span-{0} last'", div.rowSpan));
+                    x.InjectValue(div.value);
+                    x.InjectAttribute(" style='background-color:#999999;margin:4px;'");
                     returnValue += x.htmlElement;
                 }
                 else
                 {
-                    var x = new Div().InjectClass(string.Format(" class='span-{0}'", div.Key));
-                    x.InjectValue(div.Value);
+                    var x = new Div().InjectClass(string.Format(" class='span-{0}'", div.rowSpan));
+                    x.InjectValue(div.value);
+                    x.InjectAttribute(" style='background-color:#999999;margin:4px;'");
                     returnValue += x.htmlElement;
                 }
                 index++;

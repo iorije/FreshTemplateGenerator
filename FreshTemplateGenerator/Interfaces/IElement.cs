@@ -13,6 +13,7 @@ namespace FreshTemplateGenerator.Interfaces
         string value { get; set; }
 
         IElement InjectClass(string p);
+        IElement InjectAttribute(string p);
         IElement InjectValue(string p);
     }
 }

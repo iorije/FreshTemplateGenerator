@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Web;
 
 namespace FreshTemplateGenerator
 {
@@ -16,37 +17,24 @@ namespace FreshTemplateGenerator
         public FreshTemplateGenerator()
         {
             InitializeComponent();
+            ClearScreen();
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             ClearScreen();
 
-            var atIndex = ' ';
-            var rowSpans = createArrayAtChar(txtRows.Text, atIndex);
+            var formContainer = FormContainer.FillFormContainer(dgvInput);
 
-            atIndex = '\\';
-            var values = createArrayAtChar(txtValues.Text ,atIndex);
-            int max = 24;
-
-            var divs = new Dictionary<int,string>();
-            int i = 0;
-            foreach (var rowSpan in rowSpans)
+            var max = 24;
+            if (IsValidRow(FormContainer.GetRowList(dgvInput), max))
             {
-                //change values and key's from position
-                divs.Add(Convert.ToInt32(rowSpan), values[i]);
-                i++;
-            }
-            
-            if (IsValidRow(rowSpans, max))
-            {
-                txtHtmlOutput.Text += GenerateHtml.GenerateDivs(max, divs, txtHtmlOutput.Text); 
+                txtHtmlOutput.Text += GenerateHtml.GenerateDivs(max, formContainer, txtHtmlOutput.Text); 
             }
             else
             {
                 txtHtmlOutput.Text += "Do the math again.\r\n";
             }
-            lblError.Text = string.Empty;
             txtHtmlOutput.Focus();
         }
 
@@ -58,16 +46,17 @@ namespace FreshTemplateGenerator
         private void ClearScreen()
         {
             txtHtmlOutput.Text = string.Empty;
+            lblValidate.Text = string.Empty;
         }
 
-        private bool IsValidRow(string[] rowSpans, int max)
+        private bool IsValidRow(List<int> rowSpans, int max)
         {
             var sum = 0;
             foreach (var nr in rowSpans)
             {
                 try
                 {
-                    sum += Convert.ToInt32(nr);
+                    sum += nr;
                 }
                 catch
                 {
@@ -81,20 +70,18 @@ namespace FreshTemplateGenerator
             }
             else
             {
-                lblError.Text = string.Format("{0} columns left", max - sum);
+                lblValidate.Text = string.Format("{0} columns left", max - sum);
                 return false;
             }
         }
 
-        private void txtTest_TextChanged(object sender, EventArgs e)
+        private void dgvInput_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            int max = 24;
-
-            if (IsValidRow(createArrayAtChar(txtRows.Text, ' '), max))
+            var max = 24;
+            if (IsValidRow(FormContainer.GetRowList(dgvInput), max))
             {
-                lblError.Text = "Good";
+                lblValidate.Text = "Correct";
             }
-            ClearScreen();
         }
     }
 }
