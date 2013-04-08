@@ -32,10 +32,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.dgvInput = new System.Windows.Forms.DataGridView();
-            this.span = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblInput = new System.Windows.Forms.Label();
             this.lblValidate = new System.Windows.Forms.Label();
+            this.span = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.node = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,22 +74,13 @@
             this.dgvInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInput.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.span,
+            this.node,
             this.value});
             this.dgvInput.Location = new System.Drawing.Point(12, 50);
             this.dgvInput.Name = "dgvInput";
             this.dgvInput.Size = new System.Drawing.Size(875, 150);
             this.dgvInput.TabIndex = 1;
             this.dgvInput.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInput_CellEndEdit);
-            // 
-            // span
-            // 
-            this.span.HeaderText = "span";
-            this.span.Name = "span";
-            // 
-            // value
-            // 
-            this.value.HeaderText = "value";
-            this.value.Name = "value";
             // 
             // lblInput
             // 
@@ -107,6 +99,21 @@
             this.lblValidate.Size = new System.Drawing.Size(55, 13);
             this.lblValidate.TabIndex = 4;
             this.lblValidate.Text = "lblValidate";
+            // 
+            // span
+            // 
+            this.span.HeaderText = "Span";
+            this.span.Name = "span";
+            // 
+            // node
+            // 
+            this.node.HeaderText = "Node";
+            this.node.Name = "node";
+            // 
+            // value
+            // 
+            this.value.HeaderText = "Value";
+            this.value.Name = "value";
             // 
             // FreshTemplateGenerator
             // 
@@ -133,10 +140,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.DataGridView dgvInput;
-        private System.Windows.Forms.DataGridViewTextBoxColumn span;
-        private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.Label lblInput;
         private System.Windows.Forms.Label lblValidate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn span;
+        private System.Windows.Forms.DataGridViewTextBoxColumn node;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
     }
 }
 

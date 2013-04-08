@@ -27,14 +27,8 @@ namespace FreshTemplateGenerator
             var formContainer = FormContainer.FillFormContainer(dgvInput);
 
             var max = 24;
-            if (IsValidRow(FormContainer.GetRowList(dgvInput), max))
-            {
-                txtHtmlOutput.Text += GenerateHtml.GenerateDivs(max, formContainer, txtHtmlOutput.Text); 
-            }
-            else
-            {
-                txtHtmlOutput.Text += "Do the math again.\r\n";
-            }
+            txtHtmlOutput.Text += GenerateHtml.GenerateDivs(max, formContainer, txtHtmlOutput.Text); 
+            
             txtHtmlOutput.Focus();
         }
 

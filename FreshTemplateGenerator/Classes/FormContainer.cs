@@ -10,12 +10,18 @@ namespace FreshTemplateGenerator.Classes
 {
     public class FormContainer
     {
+        //When you add a value that needs to be filled from the DataGridView,
+        //also update FillFomrcontainer();
         public int rowSpan { get; set; }
+        public int node { get; set; }
         public string value { get; set; }
 
-        public FormContainer(int rowSpanInput, string valueInput)
+        public FormContainer() { }
+
+        public FormContainer(int rowSpanInput, int nodeInput, string valueInput)
         {
             rowSpan = rowSpanInput;
+            node = nodeInput;
             value = valueInput;
         }
 
@@ -24,10 +30,12 @@ namespace FreshTemplateGenerator.Classes
             var formContainer = new List<FormContainer>();
             foreach (DataGridViewRow row in dgvInput.Rows)
             {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                {
-                    formContainer.Add(new FormContainer(Convert.ToInt32(row.Cells[0].Value.ToString()), HttpUtility.HtmlEncode(row.Cells[1].Value.ToString())));
-                }
+                var tempFormContainer = new FormContainer();
+                tempFormContainer.rowSpan = Convert.ToInt32(row.Cells[0].Value);
+                tempFormContainer.node = Convert.ToInt32(row.Cells[1].Value);
+                tempFormContainer.value = HttpUtility.HtmlEncode(row.Cells[2].Value);
+                formContainer.Add(tempFormContainer);
+                tempFormContainer = null;
             }
             return formContainer;
         }
