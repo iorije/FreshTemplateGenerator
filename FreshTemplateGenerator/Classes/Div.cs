@@ -10,7 +10,7 @@ namespace FreshTemplateGenerator.Classes
     {
         public Div()
         {
-            _tag = "<div>\r\n</div>\r\n";
+            _tag = "<div>\r\n</div>";
             _index = 4;
         }
     }

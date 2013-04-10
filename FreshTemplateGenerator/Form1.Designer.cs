@@ -80,7 +80,6 @@
             this.dgvInput.Name = "dgvInput";
             this.dgvInput.Size = new System.Drawing.Size(875, 150);
             this.dgvInput.TabIndex = 1;
-            this.dgvInput.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInput_CellEndEdit);
             // 
             // lblInput
             // 

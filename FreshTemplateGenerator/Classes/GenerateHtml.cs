@@ -18,17 +18,18 @@ namespace FreshTemplateGenerator.Classes
 
         public static string GenerateDivs(List<FormContainer> formContainer, string returnValue)
         {
-            var attribute = " style='background-color:#999999;'";
+            var attribute = "";
             for(var i = 0; formContainer.Count > i; i++)
             {
                 var currentNode = formContainer[i].node;
                 var tabs = GenerateTabs(currentNode);
                 var htmlTag = SetEnum(formContainer, currentNode, i);
+                var classToInject = string.Format(" class='span-{0} background'", formContainer[i].rowSpan);
+                var isLast = CheckIfLast(currentNode, i, formContainer);
 
-                var classToInject = string.Format(" class='span-{0}'", formContainer[i].rowSpan);
-                if ( htmlTag == HtmlTag.Close || htmlTag == HtmlTag.End && formContainer[i].rowSpan != 24)
+                if ( isLast || htmlTag == HtmlTag.Close || htmlTag == HtmlTag.End && formContainer[i].rowSpan != 24 )
                 {
-                    classToInject = string.Format(" class='span-{0} last'", formContainer[i].rowSpan);
+                    classToInject = string.Format(" class='span-{0} last background'", formContainer[i].rowSpan);
                 }
                 var htmlDiv = new Div().InjectClass(classToInject);
 
@@ -48,6 +49,7 @@ namespace FreshTemplateGenerator.Classes
                 }
 
                 returnValue += htmlDiv.htmlElement.Replace("<", tabs + "<");
+
                 if (htmlTag == HtmlTag.Close || htmlTag == HtmlTag.End)
                 {
                     tabs = GenerateTabs(currentNode - 1);
@@ -64,16 +66,32 @@ namespace FreshTemplateGenerator.Classes
                         }
                     }
                 }
+                else if (htmlTag == HtmlTag.None)
+                {
+                    returnValue += "\r\n";
+                }
                 htmlDiv = null;
             }
             return returnValue;
         }
 
-        private static object GenerateTabs(int currentNode)
+        private static bool CheckIfLast(int currentNode, int i, List<FormContainer> formContainer)
+        {
+            var isLast = true;
+            for (i++; i < formContainer.Count; i++)
+            {
+                if (currentNode == formContainer[i].node)
+                {
+                    isLast = false;
+                }
+            }
+            return isLast;
+        }
+
+        private static string GenerateTabs(int currentNode)
         {
             var tabs = "";
-            currentNode--;
-            for (var i = 0; currentNode > i; i++)
+            for (var i = 1; currentNode > i; i++)
             {
                 tabs += "\t";
             }

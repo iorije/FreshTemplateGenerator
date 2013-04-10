@@ -41,40 +41,5 @@ namespace FreshTemplateGenerator
             txtHtmlOutput.Text = string.Empty;
             lblValidate.Text = string.Empty;
         }
-
-        private bool IsValidRow(List<int> rowSpans, int max)
-        {
-            var sum = 0;
-            foreach (var nr in rowSpans)
-            {
-                try
-                {
-                    sum += nr;
-                }
-                catch
-                {
-                    sum += max + 1;
-                    txtHtmlOutput.Text += "wrong input format\r\n";
-                }
-            }
-            if (sum == max)
-            {
-                return true;
-            }
-            else
-            {
-                lblValidate.Text = string.Format("{0} columns left", max - sum);
-                return false;
-            }
-        }
-
-        private void dgvInput_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            var max = 24;
-            if (IsValidRow(FormContainer.GetRowList(dgvInput), max))
-            {
-                lblValidate.Text = "Correct";
-            }
-        }
     }
 }
