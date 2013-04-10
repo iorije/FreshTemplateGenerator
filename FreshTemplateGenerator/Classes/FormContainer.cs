@@ -34,7 +34,10 @@ namespace FreshTemplateGenerator.Classes
                 tempFormContainer.rowSpan = Convert.ToInt32(row.Cells[0].Value);
                 tempFormContainer.node = Convert.ToInt32(row.Cells[1].Value);
                 tempFormContainer.value = HttpUtility.HtmlEncode(row.Cells[2].Value);
-                formContainer.Add(tempFormContainer);
+
+                if(tempFormContainer.node != 0)
+                    formContainer.Add(tempFormContainer);
+
                 tempFormContainer = null;
             }
             return formContainer;

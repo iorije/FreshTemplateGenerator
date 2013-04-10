@@ -26,8 +26,7 @@ namespace FreshTemplateGenerator
 
             var formContainer = FormContainer.FillFormContainer(dgvInput);
 
-            var max = 24;
-            txtHtmlOutput.Text += GenerateHtml.GenerateDivs(max, formContainer, txtHtmlOutput.Text); 
+            txtHtmlOutput.Text += GenerateHtml.GenerateDivs(formContainer, txtHtmlOutput.Text); 
             
             txtHtmlOutput.Focus();
         }

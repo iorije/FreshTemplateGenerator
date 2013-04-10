@@ -13,11 +13,13 @@ namespace FreshTemplateGenerator.Classes
             None,
             Open,
             Close,
+            End,
         };
 
-        public static string GenerateDivs(int max, List<FormContainer> formContainer, string returnValue)
+        public static string GenerateDivs(List<FormContainer> formContainer, string returnValue)
         {
             var last = 0;
+            var attribute = " style='background-color:#999999;'";
             for(var i = 0; formContainer.Count > i; i++)
             {
                 var currentNode = formContainer[i].node;
@@ -27,46 +29,64 @@ namespace FreshTemplateGenerator.Classes
                 {
                     last += formContainer[i].rowSpan;
                     var classToInject = string.Format(" class='span-{0}'", formContainer[i].rowSpan);
-                    if (last == max)
-                    {
-                        classToInject = string.Format(" class='span-{0} last'", formContainer[i].rowSpan);
-                    }
                     var htmlDiv = new Div().InjectClass(classToInject);
                     htmlDiv.InjectValue(tabs + formContainer[i].value);
-                    htmlDiv.InjectAttribute(" style='background-color:#999999;'");
+                    htmlDiv.InjectAttribute(attribute);
                     returnValue += htmlDiv.htmlElement.Replace("<", tabs + "<");
                     htmlDiv = null;
                 }
                 else if (htmlTag == HtmlTag.Close)
                 {
                     last += formContainer[i].rowSpan;
-                    var classToInject = string.Format(" class='span-{0}'", formContainer[i].rowSpan);
-                    if (last == max)
-                    {
-                        classToInject = string.Format(" class='span-{0} last'", formContainer[i].rowSpan);
-                    }
+                    var classToInject = string.Format(" class='span-{0} last'", formContainer[i].rowSpan);
+
+                    if(formContainer[i].rowSpan == 24)
+                        classToInject = string.Format(" class='span-{0}'", formContainer[i].rowSpan);
+
                     var htmlDiv = new Div().InjectClass(classToInject);
                     htmlDiv.InjectValue(tabs + formContainer[i].value);
-                    htmlDiv.InjectAttribute(" style='background-color:#999999;'");
+                    htmlDiv.InjectAttribute(attribute);
                     returnValue += htmlDiv.htmlElement.Replace("<", tabs+ "<");
                     tabs = GenerateTabs(currentNode - 1);
 
-                    returnValue += "\r\n" + tabs + "</div>\r\n";
+                    returnValue += string.Format("\r\n{0}</div>\r\n", tabs);
 
                     htmlDiv = null;
                 }
-                else
+                else if (htmlTag == HtmlTag.End)
+                {
+                    last += formContainer[i].rowSpan;
+                    var classToInject = string.Format(" class='span-{0} last'", formContainer[i].rowSpan);
+
+                    if (formContainer[i].rowSpan == 24)
+                        classToInject = string.Format(" class='span-{0}'", formContainer[i].rowSpan);
+
+                    var htmlDiv = new Div().InjectClass(classToInject);
+                    htmlDiv.InjectValue(tabs + formContainer[i].value);
+                    htmlDiv.InjectAttribute(attribute);
+                    returnValue += htmlDiv.htmlElement.Replace("<", tabs + "<");
+                    tabs = GenerateTabs(currentNode - 1);
+
+                    for (var t = 0; t < currentNode-1; t++)
+                    {
+
+                        tabs = GenerateTabs(currentNode - (t + 1));
+                        returnValue += string.Format("\r\n{0}</div>\r\n", tabs);
+                    }
+
+                    htmlDiv = null;
+                }
+                else if (htmlTag == HtmlTag.Open)
                 {
                     last += formContainer[i].rowSpan;
                     var classToInject = string.Format(" class='span-{0}'", formContainer[i].rowSpan);
-                    if (last == max)
-                    {
-                        classToInject = string.Format(" class='span-{0} last'", formContainer[i].rowSpan);
-                    }
                     var htmlDiv = new Div().InjectClass(classToInject);
                     htmlDiv.htmlElement = htmlDiv.htmlElement.Replace("</div>", "");
-                    htmlDiv.InjectValue(tabs+ formContainer[i].value);
-                    htmlDiv.InjectAttribute(" style='background-color:#999999;'");
+
+                    if(!string.IsNullOrEmpty(formContainer[i].value))
+                        htmlDiv.InjectValue(tabs + formContainer[i].value);
+
+                    htmlDiv.InjectAttribute(attribute);
                     returnValue += htmlDiv.htmlElement.Replace("<", tabs + "<");
                     htmlDiv = null;
                 }
@@ -106,7 +126,7 @@ namespace FreshTemplateGenerator.Classes
                     }
                     catch 
                     {
-                        return HtmlTag.Close;
+                        return HtmlTag.End;
                     }
                 }
             }
