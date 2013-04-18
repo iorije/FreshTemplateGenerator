@@ -48,14 +48,26 @@ namespace FreshTemplateGenerator.Classes
                     htmlDiv.InjectAttribute(attribute);
                 }
 
-                returnValue += htmlDiv.htmlElement.Replace("<", tabs + "<");
+                if (htmlTag == HtmlTag.Close)
+                {
+                    returnValue += htmlDiv.htmlElement.Replace("<", "\r\n" + tabs + "<");
+                }
+                else
+                {
+                    returnValue += htmlDiv.htmlElement.Replace("<", tabs + "<");
+                }
 
                 if (htmlTag == HtmlTag.Close || htmlTag == HtmlTag.End)
                 {
                     tabs = GenerateTabs(currentNode - 1);
                     if (htmlTag == HtmlTag.Close)
                     {
-                        returnValue += string.Format("\r\n{0}</div>\r\n", tabs);
+                        int nodesToclose = GetNextNode(formContainer, currentNode, i);
+                        for (var x = 0; nodesToclose > x; x++)
+                        {
+                            tabs = GenerateTabs(currentNode - 1 - x);
+                            returnValue += string.Format("\r\n{0}</div>\r\n", tabs);
+                        }
                     }
                     else
                     {
@@ -73,6 +85,11 @@ namespace FreshTemplateGenerator.Classes
                 htmlDiv = null;
             }
             return returnValue;
+        }
+
+        private static int GetNextNode(List<FormContainer> formContainer, int currentNode, int currentDiv)
+        {
+            return currentNode - formContainer[currentDiv + 1].node;
         }
 
         private static bool CheckIfLast(int currentNode, int i, List<FormContainer> formContainer)
