@@ -18,18 +18,17 @@ namespace FreshTemplateGenerator.Classes
 
         public static string GenerateDivs(List<FormContainer> formContainer, string returnValue)
         {
-            var attribute = "";
             for(var i = 0; formContainer.Count > i; i++)
             {
                 var currentNode = formContainer[i].node;
                 var tabs = GenerateTabs(currentNode);
                 var htmlTag = SetEnum(formContainer, currentNode, i);
-                var classToInject = string.Format(" class='span-{0} background'", formContainer[i].rowSpan);
                 var isLast = CheckIfLast(currentNode, i, formContainer);
 
+                var classToInject = string.Format(" class='span-{0} background {1}'", formContainer[i].rowSpan, formContainer[i].classToInject);
                 if ( isLast || htmlTag == HtmlTag.Close || htmlTag == HtmlTag.End && formContainer[i].rowSpan != 24 )
                 {
-                    classToInject = string.Format(" class='span-{0} last background'", formContainer[i].rowSpan);
+                    classToInject = string.Format(" class='span-{0} last background {1}'", formContainer[i].rowSpan, formContainer[i].classToInject);
                 }
                 var htmlDiv = new Div().InjectClass(classToInject);
 
@@ -40,13 +39,13 @@ namespace FreshTemplateGenerator.Classes
                     {
                         htmlDiv.InjectValue(tabs + formContainer[i].value);
                     }
-                    htmlDiv.InjectAttribute(attribute);
                 }
                 else
                 {
                     htmlDiv.InjectValue(tabs + formContainer[i].value);
-                    htmlDiv.InjectAttribute(attribute);
                 }
+
+                htmlDiv.InjectAttribute(formContainer[i].attributeToInject);
 
                 if (htmlTag == HtmlTag.Close)
                 {

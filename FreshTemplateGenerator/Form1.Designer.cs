@@ -37,22 +37,24 @@
             this.span = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.node = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClassToInject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AttributeToInject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInput)).BeginInit();
             this.SuspendLayout();
             // 
             // txtHtmlOutput
             // 
-            this.txtHtmlOutput.Location = new System.Drawing.Point(12, 235);
+            this.txtHtmlOutput.Location = new System.Drawing.Point(12, 337);
             this.txtHtmlOutput.Multiline = true;
             this.txtHtmlOutput.Name = "txtHtmlOutput";
             this.txtHtmlOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtHtmlOutput.Size = new System.Drawing.Size(875, 226);
+            this.txtHtmlOutput.Size = new System.Drawing.Size(875, 295);
             this.txtHtmlOutput.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 219);
+            this.label1.Location = new System.Drawing.Point(12, 321);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
@@ -60,7 +62,7 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(812, 206);
+            this.btnGenerate.Location = new System.Drawing.Point(812, 308);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(75, 23);
             this.btnGenerate.TabIndex = 2;
@@ -75,10 +77,12 @@
             this.dgvInput.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.span,
             this.node,
-            this.value});
+            this.value,
+            this.ClassToInject,
+            this.AttributeToInject});
             this.dgvInput.Location = new System.Drawing.Point(12, 50);
             this.dgvInput.Name = "dgvInput";
-            this.dgvInput.Size = new System.Drawing.Size(875, 150);
+            this.dgvInput.Size = new System.Drawing.Size(875, 252);
             this.dgvInput.TabIndex = 1;
             // 
             // lblInput
@@ -103,22 +107,36 @@
             // 
             this.span.HeaderText = "Span";
             this.span.Name = "span";
+            this.span.Width = 50;
             // 
             // node
             // 
             this.node.HeaderText = "Node";
             this.node.Name = "node";
+            this.node.Width = 40;
             // 
             // value
             // 
             this.value.HeaderText = "Value";
             this.value.Name = "value";
+            this.value.Width = 400;
+            // 
+            // ClassToInject
+            // 
+            this.ClassToInject.HeaderText = "ClassToInject";
+            this.ClassToInject.Name = "ClassToInject";
+            // 
+            // AttributeToInject
+            // 
+            this.AttributeToInject.HeaderText = "AttributeToInject";
+            this.AttributeToInject.Name = "AttributeToInject";
+            this.AttributeToInject.Width = 200;
             // 
             // FreshTemplateGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(899, 513);
+            this.ClientSize = new System.Drawing.Size(899, 644);
             this.Controls.Add(this.lblValidate);
             this.Controls.Add(this.lblInput);
             this.Controls.Add(this.dgvInput);
@@ -144,6 +162,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn span;
         private System.Windows.Forms.DataGridViewTextBoxColumn node;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClassToInject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AttributeToInject;
     }
 }
 

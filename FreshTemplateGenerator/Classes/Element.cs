@@ -21,13 +21,15 @@ namespace FreshTemplateGenerator.Classes
 
         public IElement InjectValue(string valueToInject)
         {
-            htmlElement = htmlElement.Insert(htmlElement.IndexOf(">") + 1, "\r\n\t" + valueToInject);
+            if (!string.IsNullOrEmpty(valueToInject))
+                htmlElement = htmlElement.Insert(htmlElement.IndexOf(">") + 1, "\r\n\t" + valueToInject);
             return this;
         }
 
         public IElement InjectAttribute(string attributeToInject)
         {
-            htmlElement = htmlElement.Insert(htmlElement.IndexOf(">"), attributeToInject);
+            if(!string.IsNullOrEmpty(attributeToInject))
+                htmlElement = htmlElement.Insert(htmlElement.IndexOf(">"), attributeToInject);
             return this;
         }
     }

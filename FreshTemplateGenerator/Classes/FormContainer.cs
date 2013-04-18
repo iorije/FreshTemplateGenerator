@@ -15,6 +15,8 @@ namespace FreshTemplateGenerator.Classes
         public int rowSpan { get; set; }
         public int node { get; set; }
         public string value { get; set; }
+        public string classToInject { get; set; }
+        public string attributeToInject { get; set; }
 
         public FormContainer() { }
 
@@ -34,6 +36,8 @@ namespace FreshTemplateGenerator.Classes
                 tempFormContainer.rowSpan = Convert.ToInt32(row.Cells[0].Value);
                 tempFormContainer.node = Convert.ToInt32(row.Cells[1].Value);
                 tempFormContainer.value = HttpUtility.HtmlEncode(row.Cells[2].Value);
+                tempFormContainer.classToInject = HttpUtility.HtmlEncode(row.Cells[3].Value);
+                tempFormContainer.attributeToInject = HttpUtility.HtmlEncode(row.Cells[4].Value).Replace("&quot;", "'");
 
                 if(tempFormContainer.node != 0)
                     formContainer.Add(tempFormContainer);
