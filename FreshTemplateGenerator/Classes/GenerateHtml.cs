@@ -45,7 +45,7 @@ namespace FreshTemplateGenerator.Classes
                     htmlDiv.InjectValue(tabs + formContainer[i].value);
                 }
 
-                htmlDiv.InjectAttribute(formContainer[i].attributeToInject);
+                htmlDiv.InjectAttribute(" " + formContainer[i].attributeToInject);
 
                 if (htmlTag == HtmlTag.Close)
                 {
